@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create New Story</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="centered">
+    <h1>Create New Story</h1>
+    <input type="text" id="story-name" placeholder="Story Title">
+    <button id="create-story">🚀 Create Story</button>
+  </div>
+
+  <script>
+    document.getElementById("create-story").addEventListener("click", () => {
+      const title = document.getElementById("story-name").value || "Untitled Story";
+      const storyId = "story-" + Date.now();
+      const storyData = {
+        id: storyId,
+        title,
+        mainLink: "",
+        nodes: []
+      };
+      localStorage.setItem("story-" + storyId, JSON.stringify(storyData));
+      window.location.href = `story.html?id=${storyId}`;
+    });
+  </script>
+</body>
+</html>
