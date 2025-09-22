@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Stories</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>📝 Story Mapper</h1>
+  </header>
+
+  <main>
+    <div id="story-grid">
+      <!-- Story cards injected by JS -->
+    </div>
+
+    <button id="new-story-btn" class="floating-btn">➕ New Story</button>
+  </main>
+
+  <script>
+    const storyGrid = document.getElementById("story-grid");
+    const newStoryBtn = document.getElementById("new-story-btn");
+
+    function loadStories() {
+      storyGrid.innerHTML = "";
+      for (let key in localStorage) {
+        if (!key.startsWith("story-")) continue;
+        const story = JSON.parse(localStorage.getItem(key));
+        const card = document.createElement("div");
+        card.className = "story-card";
+        card.innerHTML = `
+          <h2>${story.title}</h2>
+          <div class="card-buttons">
+            <a href="story.html?id=${story.id}" class="open-btn">📖 Open Story</a>
+            ${story.mainLink ? `<a href="${story.mainLink}" target="_blank" class="main-link">🔗 Main Link</a>` : ""}
+          </div>
+        `;
+        storyGrid.appendChild(card);
+      }
+    }
+
+    newStoryBtn.addEventListener("click", () => {
+      const title = prompt("Story Title:") || "Untitled Story";
+      const storyId = "story-" + Date.now();
+      const storyData = { id: storyId, title, mainLink: "", nodes: [] };
+      localStorage.setItem("story-" + storyId, JSON.stringify(storyData));
+      loadStories();
+    });
+
+    loadStories();
+  </script>
+</body>
+</html>
