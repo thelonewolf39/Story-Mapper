@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Story Mapper</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <h1 id="story-title">Story</h1>
+    <label>
+      Main Story Link:
+      <input type="text" id="story-link" placeholder="https://...">
+    </label>
+    <button id="save-main">💾 Save Main Story Link</button>
+
+    <section id="nodes-section">
+      <h2>Nodes</h2>
+      <div id="node-controls">
+        <button id="new-node">+ New Node</button>
+        <select id="node-select"></select>
+        <button id="delete-node">🗑️ Delete Node</button>
+      </div>
+
+      <div id="node-editor">
+        <label>
+          Node Title: <input type="text" id="node-title">
+        </label>
+        <label>
+          Body:
+          <textarea id="node-body" rows="6" placeholder="Use [[Other Node Title]] to link nodes"></textarea>
+        </label>
+        <label>
+          <input type="checkbox" id="node-main"> Main Node ⭐
+        </label>
+        <button id="save-node">💾 Save Node</button>
+      </div>
+    </section>
+
+    <h2>Graph</h2>
+    <canvas id="graph" width="600" height="400"></canvas>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
